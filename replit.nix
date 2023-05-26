@@ -1,6 +1,8 @@
 { pkgs }: {
   deps = [
     pkgs.openssh_with_kerberos
+    pkgs.import requests
+    pkgs.openssh_with_kerberos
     pkgs.sudo
     pkgs.openssh_with_kerberos
     pkgs.bashInteractive
