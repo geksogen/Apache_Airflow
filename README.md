@@ -18,6 +18,7 @@ pip3 install requests
 pip3 install 'apache-airflow[pandas]'
 pip install apache-airflow[cncf.kubernetes]
 mkdir /root/airflow/dags
+mkdir /root/airflow/episodes
 ```
 
 ### Create DAG file (get episodes) first task
@@ -278,6 +279,7 @@ feed['rss']['channel']['item']
 
 ```bash
 scp .\main.py root@212.57.126.174:~/airflow/dags/podcast_summary.py
+curl -L https://raw.githubusercontent.com/geksogen/Apache_Airflow/main/main.py > podcast_summary.py
 ```
 
 ### TD;TL
