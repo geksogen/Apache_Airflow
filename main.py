@@ -68,7 +68,7 @@ def podcast_summary():
     def download_episodes(episodes):
         for episode in episodes:
             filename = f"{episode['link'].split('/')[-1]}.mp3"
-            audio_path = os.path.join(EPISODE_FOLDER, filename)
+            audio_path = os.path.join('episodes', filename)
             if not os.path.exists(audio_path):
                 print(f"Downloading {filename}")
                 audio = requests.get(episode["enclosure"]["@url"])
