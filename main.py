@@ -81,7 +81,13 @@ def podcast_summary():
 
     @task()
     def speech_to_text(audio_files, new_episodes):
-        pass
+        hook = SqliteHook(sqlite_conn_id="podcasts")
+        untranscribed_episodes = hook.get_pandas_df("SELECT * from episodes WHERE transcript IS NULL;")
+
+        model = Model(model_name="vosk-model-small-en-us-0.15")
+        rec = KaldiRecognizer(model, FRAME_RATE)
+        rec.SetWords(True)
+        return "**OK**"
 
     speech_to_text(audio_files, new_episodes)
 
