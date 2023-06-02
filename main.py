@@ -81,9 +81,7 @@ def podcast_summary():
 
     @task()
     def speech_to_text(audio_files, new_episodes):
-        hook = SqliteHook(sqlite_conn_id="podcasts")
-        untranscribed_episodes = hook.get_pandas_df("SELECT * from episodes WHERE transcript IS NULL;")
-        return untranscribed_episodes.head(5)
+        pass
 
     speech_to_text(audio_files, new_episodes)
 
