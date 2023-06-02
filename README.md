@@ -18,7 +18,7 @@ pip3 install requests
 pip3 install 'apache-airflow[pandas]'
 pip install apache-airflow[cncf.kubernetes]
 mkdir /root/airflow/dags
-mkdir /root/airflow/episodes
+mkdir /root/airflow/dags/episodes
 ```
 
 ### Create DAG file (get episodes) first task
@@ -255,7 +255,7 @@ def podcast_summary():
     def download_episodes(episodes):
         for episode in episodes:
             filename = f"{episode['link'].split('/')[-1]}.mp3"
-            audio_path = os.path.join(EPISODE_FOLDER, filename)
+            audio_path = os.path.join(./episodes, filename)
             if not os.path.exists(audio_path):
                 print(f"Downloading {filename}")
                 audio = requests.get(episode["enclosure"]["@url"])
