@@ -90,7 +90,7 @@ def podcast_summary():
         
         for index, row in untranscribed_episodes.iterrows():
             print(f"Transcribing {row['filename']}")
-            filepath = os.path.join(EPISODE_FOLDER, row["filename"])
+            filepath = os.path.join('./episodes', row["filename"])
             mp3 = AudioSegment.from_mp3(filepath)
             mp3 = mp3.set_channels(1)
             mp3 = mp3.set_frame_rate(FRAME_RATE)
