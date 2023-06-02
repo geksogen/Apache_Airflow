@@ -80,5 +80,6 @@ def podcast_summary():
     def speech_to_text():
       a = 'test'
       return a
+    speech_to_text()
 
 summary = podcast_summary()
