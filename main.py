@@ -9,8 +9,11 @@ import pendulum
 from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.sqlite.hooks.sqlite import SqliteHook
 
-PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
+from vosk import Model, KaldiRecognizer
+from pydub import AudioSegment
 
+PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
+FRAME_RATE = 16000
 
 @dag(
   dag_id='podcast_summary',
@@ -61,7 +64,7 @@ def podcast_summary():
         hook.insert_rows(table='episodes', rows=new_episodes,
                          target_fields=["link", "title", "published", "description", "filename"])
 
-    load_episodes(podcast_episodes)
+    new_episodes = load_episodes(podcast_episodes)
 
     @task()
     def download_episodes(episodes):
@@ -74,12 +77,14 @@ def podcast_summary():
                 with open(audio_path, "wb+") as f:
                     f.write(audio.content)
 
-    download_episodes(podcast_episodes)
+    audio_files = download_episodes(podcast_episodes)
 
     @task()
-    def speech_to_text():
-      a = 'test'
-      return a
-    speech_to_text()
+    def speech_to_text(audio_files, new_episodes):
+        hook = SqliteHook(sqlite_conn_id="podcasts")
+        untranscribed_episodes = hook.get_pandas_df("SELECT * from episodes WHERE transcript IS NULL;")
+        return untranscribed_episodes.head(5)
+
+    speech_to_text(audio_files, new_episodes)
 
 summary = podcast_summary()
