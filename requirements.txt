@@ -1,4 +1,4 @@
-"apache-airflow==2.6.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.1/constraints-3.10.txt"
+apache-airflow==2.6.1 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.1/constraints-3.10.txt"
 pandas
 db-sqlite3
 xmltodict
