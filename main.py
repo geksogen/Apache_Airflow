@@ -9,11 +9,7 @@ import pendulum
 from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.sqlite.hooks.sqlite import SqliteHook
 
-from vosk import Model, KaldiRecognizer
-from pydub import AudioSegment
-
 PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
-FRAME_RATE = 16000
 
 @dag(
   dag_id='podcast_summary',
@@ -64,7 +60,7 @@ def podcast_summary():
         hook.insert_rows(table='episodes', rows=new_episodes,
                          target_fields=["link", "title", "published", "description", "filename"])
 
-    new_episodes = load_episodes(podcast_episodes)
+    load_episodes(podcast_episodes)
 
     @task()
     def download_episodes(episodes):
@@ -77,35 +73,5 @@ def podcast_summary():
                 with open(audio_path, "wb+") as f:
                     f.write(audio.content)
 
-    audio_files = download_episodes(podcast_episodes)
-
-    @task()
-    def speech_to_text(audio_files, new_episodes):
-        hook = SqliteHook(sqlite_conn_id="podcasts")
-        untranscribed_episodes = hook.get_pandas_df("SELECT * from episodes WHERE transcript IS NULL;")
-
-        model = Model(model_name="vosk-model-small-en-us-0.15")
-        rec = KaldiRecognizer(model, FRAME_RATE)
-        rec.SetWords(True)
-        
-        for index, row in untranscribed_episodes.iterrows():
-            print(f"Transcribing {row['filename']}")
-            filepath = os.path.join('./episodes', row["filename"])
-            mp3 = AudioSegment.from_mp3(filepath)
-            mp3 = mp3.set_channels(1)
-            mp3 = mp3.set_frame_rate(FRAME_RATE)
-
-            step = 20000
-            transcript = ""
-            for i in range(0, len(mp3), step):
-                print(f"Progress: {i/len(mp3)}")
-                segment = mp3[i:i+step]
-                rec.AcceptWaveform(segment.raw_data)
-                result = rec.Result()
-                text = json.loads(result)["text"]
-                transcript += text
-            hook.insert_rows(table='episodes', rows=[[row["link"], transcript]], target_fields=["link", "transcript"], replace=True)
-
-    speech_to_text(audio_files, new_episodes)
-
+    download_episodes(podcast_episodes)
 summary = podcast_summary()
