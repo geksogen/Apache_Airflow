@@ -3,7 +3,7 @@ pandas
 db-sqlite3
 xmltodict
 requests
-'apache-airflow[pandas]'
+apache-airflow[pandas]
 apache-airflow[cncf.kubernetes]
 python-multipart
 aiofiles
@@ -13,4 +13,3 @@ vosk
 ffmpeg
 transformers
 ffprobe
-torch==1.11.0
