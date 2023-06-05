@@ -1,0 +1,16 @@
+pip3 install "apache-airflow==2.6.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.1/constraints-3.10.txt"
+pip3 install pandas
+pip3 install db-sqlite3
+pip3 install xmltodict
+pip3 install requests
+pip3 install 'apache-airflow[pandas]'
+pip3 install apache-airflow[cncf.kubernetes]
+pip3 install python-multipart
+pip3 install aiofiles
+pip3 install asyncio
+pip3 install pydub
+pip3 install vosk
+pip3 install ffmpeg
+pip3 install transformers
+pip3 install ffprobe
+pip3 install torch==1.11.0
