@@ -17,6 +17,15 @@ pip3 install xmltodict
 pip3 install requests
 pip3 install 'apache-airflow[pandas]'
 pip install apache-airflow[cncf.kubernetes]
+pip install python-multipart
+pip install aiofiles
+pip install asyncio
+pip install pydub
+pip install vosk
+pip install ffmpeg
+pip install transformers
+pip install ffprobe
+pip install torch==1.11.0
 mkdir /root/airflow/dags
 mkdir /root/airflow/dags/episodes
 ```
