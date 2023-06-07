@@ -23,6 +23,6 @@ def audio_to_text():
     def resize_audio():
         print(f"Обработка завершена. **OK**")
 
-    podcast_episodes = resize_audio()
+    resize_audio()
 
 summary = audio_to_text()
