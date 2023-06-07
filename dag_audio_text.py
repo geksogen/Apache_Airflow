@@ -22,21 +22,21 @@ def audio_to_text():
     @task()
     def resize_audio():
         
-        startMin = 0
-        startSec = 0
-        endMin = 0
-        endSec = 60
-        
-        # Time to miliseconds
-        startTime = startMin * 60 * 1000 + startSec * 1000
-        endTime = endMin * 60 * 1000 + endSec * 1000
+        FRAME_RATE = 16000
+        CHANNELS = 1
 
-        # Opening file and extracting segment
-        song = AudioSegment.from_mp3('./episodes/sound.mp3')
-        extract = song[startTime:endTime]
+        model = Model(model_name="vosk-model-small-en-us-0.15")
+        rec = KaldiRecognizer(model, FRAME_RATE)
+        rec.SetWords(True)
 
-        ## Saving extract
-        extract.export('./episodes/extract.mp3', format="mp3")
+        # pydub preprocessing audio file
+        mp3 = AudioSegment.from_mp3("./episodes/sound.mp3")
+        mp3 = mp3.set_channels(CHANNELS)
+        mp3 = mp3.set_frame_rate(FRAME_RATE)
+
+        rec.AcceptWaveform(mp3.raw_data)
+        result = rec.Result()
+        text = json.loads(result)["text"]
         print(f"Обработка завершена. **OK**")
 
     podcast_episodes = resize_audio()
