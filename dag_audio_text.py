@@ -20,16 +20,16 @@ PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
   catchup=False,
 )
 
-def podcast_summary():
+def audio_to_text():
     @task()
-    def get_episodes():
+    def resize_audio():
         data = requests.get(PODCAST_URL)
         feed = xmltodict.parse(data.text)
 
         episodes = feed["rss"]["channel"]["item"]
-        print(f"Found {len(episodes)} episodes. @task get_episodes **OK**")
+        print(f"Found {len(episodes)} episodes. **OK**")
         return episodes
 
-    podcast_episodes = get_episodes()
+    podcast_episodes = resize_audio()
 
-summary = podcast_summary()
+summary = audio_to_text()
