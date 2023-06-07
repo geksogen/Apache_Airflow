@@ -15,21 +15,6 @@ mkdir /root/airflow/dags/episodes
 ### Install Python packages
 
 ```bash
-pip3 install pandas
-pip3 install db-sqlite3
-pip3 install xmltodict
-pip3 install requests
-pip3 install 'apache-airflow[pandas]'
-pip install apache-airflow[cncf.kubernetes]
-pip install python-multipart
-pip install aiofiles
-pip install asyncio
-pip install pydub
-pip install vosk
-pip install ffmpeg
-pip install transformers
-pip install ffprobe
-pip install torch==1.11.0
 curl -l https://raw.githubusercontent.com/geksogen/Apache_Airflow/main/requirements.txt > requirements.txt
 pip3 install -r requirements.txt
 ```
