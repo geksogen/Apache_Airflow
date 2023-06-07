@@ -24,6 +24,6 @@ def podcast_summary():
         data = 'test'
         return data
 
-    podcast_episodes = get_episodes()
+    get_episodes()
 
 summary = podcast_summary()
