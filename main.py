@@ -81,7 +81,7 @@ def podcast_summary():
     download_episodes(podcast_episodes)
     
     @task()
-    def audio_text():
+    def audio_text(episodes):
       #extract
       startMin = 0
       startSec = 0
@@ -98,5 +98,5 @@ def podcast_summary():
       # Saving extract
       extract.export('./episodes/extract.mp3', format="mp3")
     
-    audio_text()
+    audio_text(podcast_episodes)
 summary = podcast_summary()
