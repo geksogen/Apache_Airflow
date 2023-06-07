@@ -36,7 +36,7 @@ def podcast_summary():
 
       ## Saving extract
       extract.export('./episodes/extract.mp3', format="mp3")
-      return episodes
+      return '**OK**'
 
     podcast_episodes = get_episodes()
 
