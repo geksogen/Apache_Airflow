@@ -9,6 +9,12 @@ import pendulum
 from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.sqlite.hooks.sqlite import SqliteHook
 
+import aiofiles
+from vosk import Model, KaldiRecognizer, SetLogLevel
+from pydub import AudioSegment
+import subprocess
+import config
+
 PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
 
 @dag(
