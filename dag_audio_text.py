@@ -38,6 +38,6 @@ def podcast_summary():
       extract.export('./episodes/extract.mp3', format="mp3")
       return '**OK**'
 
-    podcast_episodes = get_episodes()
+    get_episodes()
 
 summary = podcast_summary()
