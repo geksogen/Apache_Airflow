@@ -21,6 +21,22 @@ from pydub import AudioSegment
 def audio_to_text():
     @task()
     def resize_audio():
+        
+        startMin = 0
+        startSec = 0
+        endMin = 0
+        endSec = 60
+        
+        # Time to miliseconds
+        startTime = startMin * 60 * 1000 + startSec * 1000
+        endTime = endMin * 60 * 1000 + endSec * 1000
+
+        # Opening file and extracting segment
+        song = AudioSegment.from_mp3('./episodes/sound.mp3')
+        extract = song[startTime:endTime]
+
+        ## Saving extract
+        extract.export('./episodes/extract.mp3', format="mp3")
         print(f"Обработка завершена. **OK**")
 
     podcast_episodes = resize_audio()
