@@ -4,6 +4,7 @@
 
 ```bash
 apt install python3-pip
+apt install ffmpeg
 export AIRFLOW_HOME=~/airflow
 pip3 install "apache-airflow==2.6.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.1/constraints-3.10.txt"
 airflow standalone
