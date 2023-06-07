@@ -12,5 +12,5 @@ vosk
 ffmpeg
 transformers
 ffprobe
-subprocess
+subprocess.run
 config
