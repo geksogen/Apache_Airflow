@@ -3,6 +3,7 @@
 ### Apache Airflow install
 
 ```bash
+apt-get update --fix-missing
 apt install python3-pip
 apt install ffmpeg
 export AIRFLOW_HOME=~/airflow
