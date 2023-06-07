@@ -92,7 +92,7 @@ def podcast_summary():
       endTime = endMin * 60 * 1000 + endSec * 1000
 
       # Opening file and extracting segment
-      song = AudioSegment.from_mp3('./save/soung.mp3')
+      song = AudioSegment.from_mp3('./episodes/soung.mp3')
       extract = song[startTime:endTime]
 
       # Saving extract
