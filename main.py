@@ -9,11 +9,6 @@ import pendulum
 from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.sqlite.hooks.sqlite import SqliteHook
 
-import aiofiles
-from vosk import Model, KaldiRecognizer, SetLogLevel
-from pydub import AudioSegment
-import subprocess
-
 PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
 
 @dag(
@@ -80,23 +75,4 @@ def podcast_summary():
 
     download_episodes(podcast_episodes)
     
-    @task()
-    def audio_text(episodes):
-      #extract
-      startMin = 0
-      startSec = 0
-      endMin = 0
-      endSec = 60
-      # Time to miliseconds
-      startTime = startMin * 60 * 1000 + startSec * 1000
-      endTime = endMin * 60 * 1000 + endSec * 1000
-
-      # Opening file and extracting segment
-      song = AudioSegment.from_mp3('./episodes/soung.mp3')
-      extract = song[startTime:endTime]
-
-      # Saving extract
-      extract.export('./episodes/extract.mp3', format="mp3")
-    
-    audio_text(podcast_episodes)
 summary = podcast_summary()
