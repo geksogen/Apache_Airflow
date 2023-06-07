@@ -18,9 +18,9 @@ from pydub import AudioSegment
   catchup=False,
 )
 
-def audio_text():
+def podcast_summary():
     @task()
-    def resize_audio():
+    def get_episodes():
       startMin = 0
       startSec = 0
       endMin = 0
@@ -36,7 +36,8 @@ def audio_text():
 
       ## Saving extract
       extract.export('./episodes/extract.mp3', format="mp3")
-      
-    resize_audio()
-    
-rezult = audio_text()
+      return episodes
+
+    podcast_episodes = get_episodes()
+
+summary = podcast_summary()
