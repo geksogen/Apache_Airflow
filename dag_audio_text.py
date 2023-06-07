@@ -26,18 +26,10 @@ def audio_to_text():
         FRAME_RATE = 16000
         CHANNELS = 1
 
-        model = Model(model_name="vosk-model-small-en-us-0.15")
+        model = Model(model_name="vosk-model-en-us-0.22-lgraph")
         rec = KaldiRecognizer(model, FRAME_RATE)
         rec.SetWords(True)
-
-        # pydub preprocessing audio file
-        mp3 = AudioSegment.from_mp3("./episodes/sound.mp3")
-        mp3 = mp3.set_channels(CHANNELS)
-        mp3 = mp3.set_frame_rate(FRAME_RATE)
-
-        rec.AcceptWaveform(mp3.raw_data)
-        result = rec.Result()
-        text = json.loads(result)["text"]
+        
         print(f"Обработка завершена. **OK**")
 
     podcast_episodes = resize_audio()
