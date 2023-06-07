@@ -11,8 +11,6 @@ from airflow.providers.sqlite.hooks.sqlite import SqliteHook
 
 from pydub import AudioSegment
 
-PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
-
 @dag(
   dag_id='podcast',
   schedule="@daily",
@@ -23,12 +21,7 @@ PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
 def audio_to_text():
     @task()
     def resize_audio():
-        data = requests.get(PODCAST_URL)
-        feed = xmltodict.parse(data.text)
-
-        episodes = feed["rss"]["channel"]["item"]
-        print(f"Found {len(episodes)} episodes. **OK**")
-        return episodes
+        print(f"Обработка завершена. **OK**")
 
     podcast_episodes = resize_audio()
 
