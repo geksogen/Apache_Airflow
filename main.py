@@ -13,7 +13,6 @@ import aiofiles
 from vosk import Model, KaldiRecognizer, SetLogLevel
 from pydub import AudioSegment
 import subprocess
-import config
 
 PODCAST_URL = "https://www.marketplace.org/feed/podcast/marketplace/"
 
