@@ -20,20 +20,21 @@ from pydub import AudioSegment
 
 def podcast_summary():
     @task()
-    startMin = 0
-    startSec = 0
-    endMin = 0
-    endSec = 60
+    def get_episodes():    
+      startMin = 0
+      startSec = 0
+      endMin = 0
+      endSec = 60
 
-    # Time to miliseconds
-    startTime = startMin * 60 * 1000 + startSec * 1000
-    endTime = endMin * 60 * 1000 + endSec * 1000
+      # Time to miliseconds
+      startTime = startMin * 60 * 1000 + startSec * 1000
+      endTime = endMin * 60 * 1000 + endSec * 1000
 
-    # Opening file and extracting segment
-    song = AudioSegment.from_mp3('./episodes/soung.mp3')
-    extract = song[startTime:endTime]
+      # Opening file and extracting segment
+      song = AudioSegment.from_mp3('./episodes/soung.mp3')
+      extract = song[startTime:endTime]
 
-    ## Saving extract
-    extract.export('./episodes/extract.mp3', format="mp3")
+      ## Saving extract
+      extract.export('./episodes/extract.mp3', format="mp3")
 
 summary = podcast_summary()
