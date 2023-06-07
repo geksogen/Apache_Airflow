@@ -3,10 +3,13 @@
 ### Apache Airflow install
 
 ```bash
+apt-get update --fix-missing
 apt install python3-pip
 export AIRFLOW_HOME=~/airflow
 pip3 install "apache-airflow==2.6.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.1/constraints-3.10.txt"
 airflow standalone
+mkdir /root/airflow/dags
+mkdir /root/airflow/dags/episodes
 ```
 ### Install Python packages
 
@@ -26,8 +29,20 @@ pip install ffmpeg
 pip install transformers
 pip install ffprobe
 pip install torch==1.11.0
-mkdir /root/airflow/dags
-mkdir /root/airflow/dags/episodes
+curl -l https://raw.githubusercontent.com/geksogen/Apache_Airflow/main/requirements.txt > requirements.txt
+pip3 install -r requirements.txt
+```
+
+### Create Data Base SQLite
+```bash
+cd ~/
+apt install sqlite3
+sqlite3 episodes.db
+sqlite> .databases                    #DB for store data
+sqlite> .quit
+airflow connections add 'podcasts' --conn-type 'sqlite' --conn-host 'episodes.db'
+airflow connections get podcasts      #Connections details
+
 ```
 
 ### Create DAG file (get episodes) first task
