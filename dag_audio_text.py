@@ -10,6 +10,7 @@ from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.sqlite.hooks.sqlite import SqliteHook
 
 from pydub import AudioSegment
+from vosk import Model, KaldiRecognizer
 
 @dag(
   dag_id='podcast',
