@@ -97,5 +97,6 @@ def podcast_summary():
 
       # Saving extract
       extract.export('./episodes/extract.mp3', format="mp3")
-      
+    
+    audio_text(episodes)
 summary = podcast_summary()
