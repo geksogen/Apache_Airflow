@@ -79,4 +79,27 @@ def podcast_summary():
                     f.write(audio.content)
 
     download_episodes(podcast_episodes)
+    
+    @task()
+    def audio_text(episodes):
+      #Save Upload file to disk
+      async with aiofiles.open('./episodes/soung.mp3', 'wb') as out_file:
+        await out_file.write(file)  # async write
+
+        startMin = 0
+        startSec = 0
+        endMin = 0
+        endSec = 60
+
+        # Time to miliseconds
+        startTime = startMin * 60 * 1000 + startSec * 1000
+        endTime = endMin * 60 * 1000 + endSec * 1000
+
+        # Opening file and extracting segment
+        song = AudioSegment.from_mp3('./save/soung.mp3')
+        extract = song[startTime:endTime]
+
+        ## Saving extract
+        extract.export('./episodes/extract.mp3', format="mp3")
+      
 summary = podcast_summary()
