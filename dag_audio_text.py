@@ -22,21 +22,17 @@ from vosk import Model, KaldiRecognizer
 def audio_to_text():
     @task()
     def resize_audio():
-        startMin = 0
-        startSec = 0
-        endMin = 0
-        endSec = 60
+        
+        FRAME_RATE = 16000
 
-        # Time to miliseconds
-        startTime = startMin * 60 * 1000 + startSec * 1000
-        endTime = endMin * 60 * 1000 + endSec * 1000
-
-        # Opening file and extracting segment
-        song = AudioSegment.from_mp3('./episodes/sound.mp3')
-        extract = song[startTime:endTime]
-
-        ## Saving extract
-        extract.export('./episodes/extract.mp3', format="mp3")
+        model = Model(model_name="vosk-model-en-us-0.22-lgraph")
+        rec = KaldiRecognizer(model, FRAME_RATE)
+        rec.SetWords(True)
+        
+        filepath = os.path.join('./episodes', 'sound.mp3')
+        mp3 = AudioSegment.from_mp3(filepath)
+        mp3 = mp3.set_channels(1)
+        mp3 = mp3.set_frame_rate(FRAME_RATE)
         
         print(f"Обработка завершена. **OK**")
 
