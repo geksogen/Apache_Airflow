@@ -25,7 +25,7 @@ def audio_to_text():
         
         FRAME_RATE = 16000
 
-        model = Model(model_name="vosk-model-en-us-0.22-lgraph")
+        model = Model(model_name="vosk-model-small-en-us-0.15")
         rec = KaldiRecognizer(model, FRAME_RATE)
         rec.SetWords(True)
         
