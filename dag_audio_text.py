@@ -24,11 +24,15 @@ def audio_to_text():
     def resize_audio():
         
         FRAME_RATE = 16000
-        CHANNELS = 1
 
         model = Model(model_name="vosk-model-en-us-0.22-lgraph")
         rec = KaldiRecognizer(model, FRAME_RATE)
         rec.SetWords(True)
+        
+        filepath = os.path.join('./episodes', 'sound.mp3')
+        mp3 = AudioSegment.from_mp3(filepath)
+        mp3 = mp3.set_channels(1)
+        mp3 = mp3.set_frame_rate(FRAME_RATE)
         
         print(f"Обработка завершена. **OK**")
 
