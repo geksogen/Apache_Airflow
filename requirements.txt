@@ -5,8 +5,6 @@ requests
 apache-airflow[pandas]
 apache-airflow[cncf.kubernetes]
 python-multipart
-aiofiles
-asyncio
 pydub
 vosk
 ffmpeg
