@@ -28,9 +28,9 @@ def audio_to_text():
         FRAME_RATE = 16000
         
         filepath = os.path.join('./episodes', 'sound.mp3')
-        mp3 = librosa.util.example_audio_file(filepath)
-        y1, sr1 = librosa.load(mp3, sr=16000)
-        print(sr1)
+        mp3 = AudioSegment.from_mp3(filepath)
+        mp3 = mp3.set_channels(1)
+        mp3 = mp3.set_frame_rate(FRAME_RATE)
         
         print(f"Обработка завершена. **OK**")
 
